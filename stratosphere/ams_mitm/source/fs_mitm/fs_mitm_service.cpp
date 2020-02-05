@@ -187,39 +187,14 @@ namespace ams::mitm::fs {
         R_TRY(fsOpenBisStorageFwd(this->forward_service.get(), &bis_storage, bis_partition_id));
         const sf::cmif::DomainObjectId target_object_id{serviceGetObjectId(&bis_storage.s)};
 
-        const bool is_sysmodule = ncm::IsSystemProgramId(this->client_info.program_id);
-        const bool is_hbl = this->client_info.override_status.IsHbl();
-        const bool can_write_bis = is_sysmodule || (is_hbl && GetSettingsItemBooleanValue("atmosphere", "enable_hbl_bis_write"));
-        const bool can_read_cal  = is_sysmodule || (is_hbl && GetSettingsItemBooleanValue("atmosphere", "enable_hbl_cal_read"));
-
-        /* Allow HBL to write to boot1 (safe firm) + package2. */
-        /* This is needed to not break compatibility with ChoiDujourNX, which does not check for write access before beginning an update. */
-        /* TODO: get fixed so that this can be turned off without causing bricks :/ */
-        const bool is_package2 = (FsBisPartitionId_BootConfigAndPackage2Part1 <= bis_partition_id && bis_partition_id <= FsBisPartitionId_BootConfigAndPackage2Part6);
-        const bool is_boot1    = bis_partition_id == FsBisPartitionId_BootPartition2Root;
-        const bool can_write_bis_for_choi_support = is_hbl && (is_package2 || is_boot1);
-
+		/*hope this works*/
+		/*Farni mad*/
         /* Set output storage. */
         if (bis_partition_id == FsBisPartitionId_BootPartition1Root) {
             out.SetValue(std::make_shared<IStorageInterface>(new Boot0Storage(bis_storage, this->client_info)), target_object_id);
-        } else if (bis_partition_id == FsBisPartitionId_CalibrationBinary) {
-            /* PRODINFO should *never* be writable. */
-            /* If we have permissions, create a read only storage. */
-            if (can_read_cal) {
-                out.SetValue(std::make_shared<IStorageInterface>(new ReadOnlyStorageAdapter(new RemoteStorage(bis_storage))), target_object_id);
-            } else {
-                /* If we can't read cal, return permission denied. */
-                fsStorageClose(&bis_storage);
-                return fs::ResultPermissionDenied();
-            }
+			
         } else {
-            if (can_write_bis || can_write_bis_for_choi_support) {
-                /* We can write, so create a writable storage. */
-                out.SetValue(std::make_shared<IStorageInterface>(new RemoteStorage(bis_storage)), target_object_id);
-            } else {
-                /* We can only read, so create a readable storage. */
-                out.SetValue(std::make_shared<IStorageInterface>(new ReadOnlyStorageAdapter(new RemoteStorage(bis_storage))), target_object_id);
-            }
+			out.SetValue(std::make_shared<IStorageInterface>(new RemoteStorage(bis_storage)), target_object_id);	
         }
 
         return ResultSuccess();

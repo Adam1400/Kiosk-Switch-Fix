@@ -26,6 +26,7 @@ namespace ams::mitm::settings {
 
                 GetSettingsItemValueSize = 37,
                 GetSettingsItemValue     = 38,
+				GetQuestFlag             = 47,
             };
         public:
             static bool ShouldMitm(const sm::MitmProcessInfo &client_info) {
@@ -41,12 +42,14 @@ namespace ams::mitm::settings {
             Result GetFirmwareVersion2(sf::Out<ams::settings::FirmwareVersion> out);
             Result GetSettingsItemValueSize(sf::Out<u64> out_size, const ams::settings::fwdbg::SettingsName &name, const ams::settings::fwdbg::SettingsItemKey &key);
             Result GetSettingsItemValue(sf::Out<u64> out_size, const sf::OutBuffer &out, const ams::settings::fwdbg::SettingsName &name, const ams::settings::fwdbg::SettingsItemKey &key);
-        public:
+			Result GetQuestFlag(sf::Out<bool> isQuest);
+		public:
             DEFINE_SERVICE_DISPATCH_TABLE {
                 MAKE_SERVICE_COMMAND_META(GetFirmwareVersion),
                 MAKE_SERVICE_COMMAND_META(GetFirmwareVersion2),
                 MAKE_SERVICE_COMMAND_META(GetSettingsItemValueSize),
                 MAKE_SERVICE_COMMAND_META(GetSettingsItemValue),
+				MAKE_SERVICE_COMMAND_META(GetQuestFlag),
             };
     };
 

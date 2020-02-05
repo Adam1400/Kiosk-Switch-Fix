@@ -85,6 +85,12 @@ namespace ams::mitm::settings {
         }
 
     }
+	
+	/*hope this works*/
+	Result SetSysMitmService::GetQuestFlag(sf::Out<bool> isQuest) {
+        isQuest.SetValue(false);
+        return 0;
+    }
 
     Result SetSysMitmService::GetFirmwareVersion(sf::Out<settings::FirmwareVersion> out) {
         R_TRY(GetFirmwareVersionImpl(out.GetPointer(), this->client_info));
