@@ -1,5 +1,5 @@
 # Kiosk-Switch-Fix 
-Patched version of atmosphere that allows a kiosk Nintendo Switch to boot.  
+Patched version of atmosphere that allows a [kiosk](https://i0.wp.com/nintendotimes.com/wp-content/uploads/2017/09/Mario-Odyssey-Demo.jpg?ssl=1) Nintendo Switch to boot.  
 
 Drag atmosphere folder on sd card (merge with existing atmosphere folder). 
 
