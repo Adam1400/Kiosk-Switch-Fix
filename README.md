@@ -7,9 +7,8 @@ NOTE: may not work with newer versions of Atmosphere.
 Tested on Firmware: 9.2.0|AMS 0.10.3|S
 
 for source code contributions see:  
-src/stratosphere/ams_mitm/source/set_mitm/setsys_mitm_service.cpp
-src/stratosphere/ams_mitm/source/set_mitm/setsys_mitm_service.hpp
-Kiosk-Switch-Fix/stratosphere/ams_mitm/source/fs_mitm/fs_mitm_service.cpp
+[fs_mitm_service](https://github.com/Adam1400/Kiosk-Switch-Fix/blob/master/src/stratosphere/ams_mitm/source/fs_mitm/fs_mitm_service.cpp)  
+[setsys_mitm_service.cpp](https://github.com/Adam1400/Kiosk-Switch-Fix/blob/master/src/stratosphere/ams_mitm/source/set_mitm/setsys_mitm_service.cpp)  
+[setsys_mitm_service.hpp](https://github.com/Adam1400/Kiosk-Switch-Fix/blob/master/src/stratosphere/ams_mitm/source/set_mitm/setsys_mitm_service.hpp)
 
-just the kip: 
-src/stratosphere/ams_mitm/ams_mitm.kip
+
